@@ -7,7 +7,6 @@ struct Assignment {
 
 impl Assignment {
     fn overlap(&self, other: &Assignment) -> bool {
-        println!("comparing {}-{} to {}-{}", self.start, self.end, other.start, other.end);
         (self.start <= other.start && self.end >= other.start) || (self.start >= other.end && self.end <= other.end)
     }
 }
