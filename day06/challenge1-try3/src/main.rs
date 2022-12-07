@@ -1,18 +1,5 @@
 use std::io;
 
-fn no_dups(s: &str) -> usize{
-    for i in 0..s.len() {
-        for j in 0..s.len() {
-            if i != j {
-                if s.chars().nth(i).unwrap() == s.chars().nth(j).unwrap() {
-                    return i+1;
-                }
-            }
-        }
-    }
-    return 0;
-}
-
 fn main() {
     let lines = io::stdin().lines();
     for line in lines {
@@ -24,12 +11,14 @@ fn main() {
 
         while s+ws < line_str.len() {
             let window = &line_str[s..s+ws];
-            let dup_offset = no_dups(window);
-            if dup_offset == 0 {
+            let mut wv:Vec<char> = window.chars().collect();
+            wv.sort();
+            wv.dedup();
+            if wv.len() == ws {
                 println!("{}", s+ws);
                 break;
             }
-            s+=dup_offset;
+            s+=1;
             //e+=dup_offset;
         }
     }
